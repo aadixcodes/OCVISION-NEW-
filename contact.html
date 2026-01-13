@@ -22,6 +22,7 @@
             --whatsapp-color: #25D366;
         }
 
+
         /* Contact Layout */
         .contact-page {
             min-height: 100vh;
@@ -30,6 +31,7 @@
             display: flex;
             align-items: center;
             margin-top: 80px;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
         /* Animated Background Blob */
@@ -48,9 +50,15 @@
             grid-template-columns: 1fr 1.2fr;
             gap: 6rem;
             width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         /* LEFT SIDE: Info */
+        .contact-info {
+            text-align: center; /* Center heading on mobile */
+        }
+
         .contact-info h1 {
             font-size: clamp(3rem, 8vw, 6rem);
             line-height: 0.9;
@@ -61,10 +69,12 @@
             color: #888;
             max-width: 400px;
             margin-bottom: 3rem;
+            text-align: left; /* Keep paragraph left-aligned */
         }
 
         .contact-details {
             margin-bottom: 3rem;
+            text-align: left; /* Keep details left-aligned */
         }
 
         .detail-item {
@@ -78,27 +88,34 @@
         .detail-item i {
             color: var(--accent-color);
             font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
-        /* WhatsApp CTA */
+        /* WhatsApp CTA - UPDATED TO ORANGE THEME */
         .whatsapp-cta {
             display: inline-flex;
             align-items: center;
             gap: 1rem;
             padding: 1rem 2rem;
-            border: 1px solid var(--whatsapp-color);
+            border: 1px solid var(--accent-color); /* ORANGE border */
             border-radius: 50px;
-            color: var(--whatsapp-color);
+            color: var(--accent-color); /* ORANGE text */
             font-family: var(--font-heading);
             font-weight: 700;
             text-transform: uppercase;
             transition: all 0.4s ease;
+            background: transparent;
         }
 
         .whatsapp-cta:hover {
-            background: var(--whatsapp-color);
-            color: #000;
-            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+            background: var(--accent-color); /* ORANGE background on hover */
+            color: #000; /* Black text on hover for contrast */
+            box-shadow: 0 0 20px rgba(255, 77, 0, 0.4); /* ORANGE shadow */
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-cta i {
+            font-size: 1.2rem;
         }
 
         /* RIGHT SIDE: Form */
@@ -110,6 +127,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
+            max-width: 100%;
         }
 
         /* Form Line Decoration */
@@ -124,6 +142,7 @@
         .form-group {
             position: relative;
             margin-bottom: 2.5rem;
+            width: 100%;
         }
 
         .form-group input, 
@@ -139,6 +158,7 @@
             color: white;
             transition: border-color 0.3s;
             border-radius: 0;
+            box-sizing: border-box;
         }
 
         .form-group select {
@@ -189,6 +209,27 @@
             
             .contact-info h1 {
                 font-size: 3.5rem;
+                text-align: center;
+            }
+            
+            .contact-info p {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .contact-details {
+                text-align: center;
+            }
+            
+            .detail-item {
+                justify-content: center;
+            }
+            
+            .whatsapp-cta {
+                display: flex;
+                justify-content: center;
+                margin: 0 auto;
             }
             
             .bg-blob {
@@ -219,6 +260,60 @@
             .whatsapp-cta {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
+                width: fit-content;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            /* Mobile footer centering */
+            .footer-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .footer-links {
+                text-align: center;
+                width: 100%;
+            }
+            
+            .footer-links ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .footer-links li {
+                flex: 0 0 auto;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .contact-info h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-details {
+                font-size: 0.9rem;
+            }
+            
+            .form-container {
+                padding: 1rem;
+            }
+            
+            .form-group {
+                margin-bottom: 2rem;
             }
         }
     </style>
@@ -266,11 +361,11 @@
                 <div class="contact-details">
                     <div class="detail-item hover-target">
                         <i class="ri-mail-send-line"></i>
-                        <span>hello@ocvision.com</span>
+                        <span>theocvisionagency@gmail.com</span>
                     </div>
                     <div class="detail-item hover-target">
                         <i class="ri-phone-line"></i>
-                        <span>+1 987 654 3210</span>
+                        <span>+91 8109941748, +91 9407072203</span>
                     </div>
                     <div class="detail-item hover-target">
                         <i class="ri-map-pin-line"></i>
@@ -278,8 +373,8 @@
                     </div>
                 </div>
 
-                <!-- WhatsApp CTA -->
-                <a href="https://wa.me/1234567890" target="_blank" class="whatsapp-cta hover-target">
+                <!-- WhatsApp CTA - Now with orange theme -->
+                <a href="https://wa.me/918109941748" target="_blank" class="whatsapp-cta hover-target">
                     <i class="ri-whatsapp-line"></i> Chat on WhatsApp
                 </a>
             </div>
@@ -304,7 +399,7 @@
 
                     <div class="form-group">
                         <select id="requirement" required class="hover-target">
-                            <option value="" disabled selected>Select Requirement</option>
+                            <option value="" disabled selected></option>
                             <option value="Wedding">Wedding Photography</option>
                             <option value="Fashion">Fashion / Product Shoot</option>
                             <option value="Event">Event Coverage</option>
@@ -326,12 +421,12 @@
         </div>
     </section>
 
-    <!-- Footer -->
+     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
                 <h2>OCVISION</h2>
-                <p>Ready to start your project?</p>
+                <p>Capturing the unseen.</p>
             </div>
             <div class="footer-links">
                 <h4>Sitemap</h4>
@@ -344,52 +439,87 @@
                 </ul>
             </div>
             <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="services.html#wedding" class="hover-target">Wedding Photography</a></li>
+                    <li><a href="services.html#fashion" class="hover-target">Fashion & Product</a></li>
+                    <li><a href="services.html#event" class="hover-target">Event Coverage</a></li>
+                    <li><a href="services.html#commercials" class="hover-target">Commercials & Reels</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
                 <h4>Contact Info</h4>
                 <ul>
-                    <li><i class="ri-mail-line"></i> hello@ocvision.com</li>
-                    <li><i class="ri-phone-line"></i> +1 987 654 3210</li>
+                    <li><i class="ri-mail-line"></i> theocvisionagency@gmail.com</li>
+                    <li><i class="ri-phone-line"></i> +91 8109941748, +91 9407072203</li>
                     <li><i class="ri-map-pin-line"></i> New York, NY</li>
-                    <li><a href="https://wa.me/1234567890" target="_blank" class="hover-target"><i class="ri-whatsapp-line"></i> WhatsApp</a></li>
+                    <li><a href="https://wa.me/918109941748" target="_blank" class="hover-target"><i class="ri-whatsapp-line"></i>Chat on WhatsApp</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 OCVISION Agency. All rights reserved.</p>
-            <p>Designed with Passion.</p>
+            <p>&copy; 2026 Ocvision. All rights reserved.</p>
+            <p>Designed & Developed by <a href="https://www.astexai.in/" target="_blank" class="hover-target" style="color: #FFA500;">Astex AI.</a></p>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
     <script src="script.js"></script>
 
     <script>
         // Contact Page Specific Animations
         document.addEventListener('DOMContentLoaded', function() {
+            // CURSOR FUNCTIONALITY - Add cursor movement
+            const cursor = document.querySelector('.cursor');
+            const hoverTargets = document.querySelectorAll('.hover-target');
+            
+            // Make sure cursor is visible
+            cursor.style.display = 'block';
+            cursor.style.opacity = '1';
+            
+            // Move cursor with mouse
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            
+            // Hover effects
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hover');
+                });
+                
+                target.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover');
+                });
+            });
+
             // Page Animations (GSAP)
             const tl = gsap.timeline();
 
             // Reveal Heading
-            tl.from(".contact-info h1", {
-                y: 100,
-                opacity: 0,
+            tl.to(".contact-info h1", {
+                y: 0,
+                opacity: 1,
                 duration: 1.5,
                 ease: "power4.out",
                 delay: 0.2
             })
             // Fade in details
-            .from(".contact-info p, .detail-item, .whatsapp-cta", {
-                y: 20,
-                opacity: 0,
+            .to(".contact-info p, .detail-item, .whatsapp-cta", {
+                y: 0,
+                opacity: 1,
                 duration: 0.8,
                 stagger: 0.1,
                 ease: "power2.out"
             }, "-=1")
             // Slide form up
-            .from(".form-container", {
-                y: 100,
-                opacity: 0,
+            .to(".form-container", {
+                y: 0,
+                opacity: 1,
                 duration: 1.2,
                 ease: "power3.out"
             }, "-=1");
@@ -452,6 +582,11 @@
                     form.reset();
                     select.style.color = '#aaa';
                 });
+            }
+            
+            // Hide cursor on touch devices
+            if ('ontouchstart' in window || navigator.maxTouchPoints) {
+                cursor.style.display = 'none';
             }
         });
     </script>

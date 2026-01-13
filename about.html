@@ -121,6 +121,11 @@
             top: 100px;
         }
 
+         .mission-title p {
+            position: sticky;
+            top: 250px;
+        }
+
         .expertise-list {
             display: flex;
             flex-direction: column;
@@ -195,15 +200,68 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            /* HERO SECTION CHANGES */
+            .page-header {
+                height: 30vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .page-title h1 {
+                line-height: 1;
+                word-spacing: 0.2em;
+                letter-spacing: -0.02em;
+            }
+            
+            .page-title span {
+                margin-bottom: 0.8rem;
+                letter-spacing: 1px;
+            }
+            
             .story-section, .mission-section { grid-template-columns: 1fr; }
             .story-image { height: 400px; }
             .mission-title h2 { position: static; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .team-grid { grid-template-columns: 1fr; }
+             .mission-section {
+            padding: 2rem var(--padding-inline);
+        }
         }
         
         @media (max-width: 480px) {
             .stats-grid { grid-template-columns: 1fr; }
+            
+            /* Mobile footer centering */
+            .footer-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .footer-links {
+                text-align: center;
+            }
+            
+            .footer-links ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .footer-links li {
+                flex: 0 0 auto;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
         }
     </style>
 </head>
@@ -342,12 +400,12 @@
         </div>
     </section>
 
-    <!-- Footer -->
+     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
                 <h2>OCVISION</h2>
-                <p>Ready to start your project?</p>
+                <p>Capturing the unseen.</p>
             </div>
             <div class="footer-links">
                 <h4>Sitemap</h4>
@@ -368,10 +426,19 @@
                     <li><a href="services.html#commercials" class="hover-target">Commercials & Reels</a></li>
                 </ul>
             </div>
+            <div class="footer-links">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li><i class="ri-mail-line"></i> theocvisionagency@gmail.com</li>
+                    <li><i class="ri-phone-line"></i> +91 8109941748, +91 9407072203</li>
+                    <li><i class="ri-map-pin-line"></i> New York, NY</li>
+                    <li><a href="https://wa.me/918109941748" target="_blank" class="hover-target"><i class="ri-whatsapp-line"></i>Chat on WhatsApp</a></li>
+                </ul>
+            </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 OCVISION Agency. All rights reserved.</p>
-            <p>Designed with Passion.</p>
+            <p>&copy; 2026 Ocvision. All rights reserved.</p>
+            <p>Designed & Developed by <a href="https://www.astexai.in/" target="_blank" class="hover-target" style="color: #FFA500;">Astex AI.</a></p>
         </div>
     </footer>
 

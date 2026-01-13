@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | OCVISION</title>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    
+
     <!-- Shared CSS -->
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
         /* Portfolio Page Specific Styles */
         .portfolio-header {
@@ -23,22 +26,23 @@
             text-align: center;
             margin-top: 80px;
         }
-        
+
         .portfolio-header h1 {
             font-size: clamp(3rem, 10vw, 8rem);
             margin-bottom: 1rem;
-            
+
             /* FIX: Hide initially to prevent flash/conflict */
-            opacity: 0; 
+            opacity: 0;
             transform: translateY(50px);
-            visibility: hidden; /* Ensures it's not clickable/selectable until anim starts */
+            visibility: hidden;
+            /* Ensures it's not clickable/selectable until anim starts */
         }
-        
+
         .portfolio-header p {
             max-width: 600px;
             margin: 0 auto;
             color: #888;
-            
+
             /* FIX: Hide initially */
             opacity: 0;
             transform: translateY(20px);
@@ -48,6 +52,8 @@
         /* Photo Gallery (Masonry) */
         .gallery-section {
             padding: 0 var(--padding-inline) 8rem;
+            overflow: hidden;
+            /* Prevent horizontal scrolling */
         }
 
         /* Filter Tabs */
@@ -72,7 +78,8 @@
             transition: all 0.3s;
         }
 
-        .filter-btn.active, .filter-btn:hover {
+        .filter-btn.active,
+        .filter-btn:hover {
             border-color: var(--accent-color);
             color: white;
             background: rgba(255, 77, 0, 0.1);
@@ -102,18 +109,22 @@
 
         .gallery-item img {
             width: 100%;
+            height: auto;
             border-radius: 8px;
             transition: transform 0.7s ease;
         }
 
         .gallery-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .overlay {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -126,14 +137,26 @@
             opacity: 1;
         }
 
-        .overlay h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .overlay p { font-size: 0.8rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px;}
+        .overlay h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
 
-        /* Video Showcase */
+        .overlay p {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Video Showcase - MASONRY LAYOUT */
         .video-section {
             background: var(--secondary-color);
             padding: 6rem var(--padding-inline);
             border-top: 1px solid #333;
+            overflow: hidden;
+            /* Prevent horizontal scrolling */
         }
 
         .section-title {
@@ -145,7 +168,8 @@
 
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-auto-flow: dense;
             gap: 2rem;
         }
 
@@ -153,8 +177,30 @@
             position: relative;
             border-radius: 12px;
             overflow: hidden;
-            aspect-ratio: 16/9;
             background: #000;
+            height: auto;
+            min-height: 250px;
+        }
+
+        /* Different aspect ratios for masonry effect */
+        .video-card:nth-child(1) {
+            grid-row: span 2;
+        }
+
+        .video-card:nth-child(2) {
+            grid-row: span 1;
+        }
+
+        .video-card:nth-child(3) {
+            grid-row: span 1;
+        }
+
+        .video-card:nth-child(4) {
+            grid-row: span 2;
+        }
+
+        .video-card:nth-child(5) {
+            grid-row: span 1;
         }
 
         .video-card video {
@@ -171,13 +217,15 @@
 
         .play-btn {
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
             font-size: 3rem;
             color: white;
             pointer-events: none;
             transition: transform 0.3s;
             mix-blend-mode: overlay;
+            z-index: 2;
         }
 
         .video-card:hover .play-btn {
@@ -190,14 +238,32 @@
             bottom: 1rem;
             left: 1.5rem;
             z-index: 2;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            width: 100%;
+            padding: 1rem;
+            left: 0;
+            bottom: 0;
+        }
+
+        .video-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            word-break: break-word;
+        }
+
+        .video-info p {
+            color: var(--accent-color);
+            font-size: 0.8rem;
         }
 
         /* Lightbox Modal */
         .lightbox {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             display: flex;
             justify-content: center;
@@ -216,7 +282,7 @@
             max-width: 90%;
             max-height: 90vh;
             border-radius: 4px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
         }
 
         .close-lightbox {
@@ -233,24 +299,102 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .gallery-grid { column-count: 2; }
-            .video-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid {
+                column-count: 2;
+            }
+
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+
+            .video-card:nth-child(1),
+            .video-card:nth-child(4) {
+                grid-row: span 1;
+            }
         }
-        
+
         @media (max-width: 768px) {
-            .gallery-grid { column-count: 1; }
-            .video-grid { grid-template-columns: 1fr; }
-            .section-title { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .portfolio-header { padding: 8rem var(--padding-inline) 3rem; }
+            .gallery-grid {
+                column-count: 1;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .portfolio-header {
+                padding: 8rem var(--padding-inline) 3rem;
+            }
+
+            .video-card {
+                height: 300px;
+            }
         }
-        
+
         @media (max-width: 480px) {
-            .filter-tabs { gap: 0.5rem; }
-            .filter-btn { padding: 0.6rem 1.2rem; font-size: 0.7rem; }
-            .video-grid { gap: 1rem; }
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.7rem;
+            }
+
+            .video-grid {
+                gap: 1rem;
+            }
+
+            /* Mobile footer centering */
+            .footer-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .footer-links {
+                text-align: center;
+                width: 100%;
+            }
+
+            .footer-links ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .footer-links li {
+                flex: 0 0 auto;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .video-card {
+                height: 250px;
+            }
+
+            .portfolio-header {
+                padding: 6rem var(--padding-inline) 2rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- Custom Cursor -->
@@ -287,7 +431,7 @@
 
     <!-- Photo Gallery -->
     <section class="gallery-section">
-        
+
         <!-- Filter Tabs -->
         <div class="filter-tabs">
             <button class="filter-btn active hover-target" data-filter="all">All Work</button>
@@ -298,10 +442,10 @@
 
         <!-- Gallery Grid -->
         <div class="gallery-grid">
-            
+
             <!-- Item 1: Fashion -->
             <div class="gallery-item fashion hover-target">
-                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1888&auto=format&fit=crop" alt="Fashion Model">
+                <img src="./images/1.png" alt="Fashion Model">
                 <div class="overlay">
                     <h3>Vogue Street</h3>
                     <p>Fashion</p>
@@ -310,7 +454,7 @@
 
             <!-- Item 2: Product -->
             <div class="gallery-item product hover-target">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop" alt="Watch">
+                <img src="./images/2.png" alt="Watch">
                 <div class="overlay">
                     <h3>Timeless Luxury</h3>
                     <p>Product</p>
@@ -319,7 +463,7 @@
 
             <!-- Item 3: Nature -->
             <div class="gallery-item nature hover-target">
-                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1974&auto=format&fit=crop" alt="Landscape">
+                <img src="./images/3.png" alt="Landscape">
                 <div class="overlay">
                     <h3>Misty Mornings</h3>
                     <p>Nature</p>
@@ -328,7 +472,7 @@
 
             <!-- Item 4: Fashion -->
             <div class="gallery-item fashion hover-target">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1964&auto=format&fit=crop" alt="Portrait">
+                <img src="./images/4.png" alt="Portrait">
                 <div class="overlay">
                     <h3>Neon Gaze</h3>
                     <p>Fashion</p>
@@ -337,7 +481,7 @@
 
             <!-- Item 5: Product -->
             <div class="gallery-item product hover-target">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop" alt="Headphones">
+                <img src="./images/5.png" alt="Headphones">
                 <div class="overlay">
                     <h3>Sonic Boom</h3>
                     <p>Product</p>
@@ -346,7 +490,7 @@
 
             <!-- Item 6: Event/Nature -->
             <div class="gallery-item nature hover-target">
-                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop" alt="Concert">
+                <img src="./images/6.png" alt="Concert">
                 <div class="overlay">
                     <h3>The Crowd</h3>
                     <p>Event</p>
@@ -355,7 +499,7 @@
 
             <!-- Item 7: Fashion -->
             <div class="gallery-item fashion hover-target">
-                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop" alt="Fashion Coat">
+                <img src="./images/7.png" alt="Fashion Coat">
                 <div class="overlay">
                     <h3>Winter Collection</h3>
                     <p>Fashion</p>
@@ -364,16 +508,32 @@
 
             <!-- Item 8: Product -->
             <div class="gallery-item product hover-target">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop" alt="Sneaker">
+                <img src="./images/8.png" alt="Sneaker">
                 <div class="overlay">
                     <h3>Urban Steps</h3>
                     <p>Product</p>
                 </div>
             </div>
 
-             <!-- Item 9: Nature -->
-             <div class="gallery-item nature hover-target">
-                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2070&auto=format&fit=crop" alt="Mountains">
+            <!-- Item 9: Nature -->
+            <div class="gallery-item nature hover-target">
+                <img src="./images/9.png" alt="Mountains">
+                <div class="overlay">
+                    <h3>High Peaks</h3>
+                    <p>Nature</p>
+                </div>
+            </div>
+            <!-- Item 9: Nature -->
+            <div class="gallery-item nature hover-target">
+                <img src="./images/10.JPG" alt="Mountains">
+                <div class="overlay">
+                    <h3>High Peaks</h3>
+                    <p>Nature</p>
+                </div>
+            </div>
+            <!-- Item 9: Nature -->
+            <div class="gallery-item nature hover-target">
+                <img src="./images/11.JPG" alt="Mountains">
                 <div class="overlay">
                     <h3>High Peaks</h3>
                     <p>Nature</p>
@@ -391,66 +551,23 @@
         </div>
 
         <div class="video-grid">
-            
+
             <!-- Video 1 -->
             <div class="video-card hover-target">
-                <video loop muted poster="https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=2000&auto=format&fit=crop">
-                    <source src="https://v4.cdnpk.net/videvo_files/video/free/2019-11/large_watermarked/190301_1_25_11_preview.mp4" type="video/mp4">
+                <video loop muted playsinline
+                    poster="./images/1.png">
+                    <source
+                        src="./videos/1.mp4"
+                        type="video/mp4">
                 </video>
                 <i class="ri-play-circle-line play-btn"></i>
-                <div class="video-info">
+                <!-- <div class="video-info">
                     <h4>Cinematic Travel</h4>
-                    <p style="color:var(--accent-color); font-size: 0.8rem;">Travel / Vlog</p>
-                </div>
+                    <p>Travel / Vlog</p>
+                </div> -->
             </div>
 
-            <!-- Video 2 -->
-            <div class="video-card hover-target">
-                <video loop muted poster="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop">
-                    <source src="https://v4.cdnpk.net/videvo_files/video/free/2014-12/large_watermarked/Raindrops_Macro2_preview.mp4" type="video/mp4">
-                </video>
-                <i class="ri-play-circle-line play-btn"></i>
-                <div class="video-info">
-                    <h4>Macro Details</h4>
-                    <p style="color:var(--accent-color); font-size: 0.8rem;">B-Roll / Texture</p>
-                </div>
-            </div>
-
-            <!-- Video 3 -->
-            <div class="video-card hover-target">
-                <video loop muted poster="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=2070&auto=format&fit=crop">
-                    <source src="https://v4.cdnpk.net/videvo_files/video/free/2015-08/large_watermarked/Crowd_Cheering_preview.mp4" type="video/mp4">
-                </video>
-                <i class="ri-play-circle-line play-btn"></i>
-                <div class="video-info">
-                    <h4>Music Festival</h4>
-                    <p style="color:var(--accent-color); font-size: 0.8rem;">Event Coverage</p>
-                </div>
-            </div>
-
-            <!-- Video 4 -->
-            <div class="video-card hover-target">
-                <video loop muted poster="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=2070&auto=format&fit=crop">
-                    <source src="https://v4.cdnpk.net/videvo_files/video/free/2019-09/large_watermarked/190828_27_Supermarket_preview.mp4" type="video/mp4">
-                </video>
-                <i class="ri-play-circle-line play-btn"></i>
-                <div class="video-info">
-                    <h4>Urban Life</h4>
-                    <p style="color:var(--accent-color); font-size: 0.8rem;">Documentary</p>
-                </div>
-            </div>
-
-             <!-- Video 5 -->
-             <div class="video-card hover-target">
-                <video loop muted poster="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop">
-                    <source src="https://v4.cdnpk.net/videvo_files/video/free/2013-08/large_watermarked/hd0992_preview.mp4" type="video/mp4">
-                </video>
-                <i class="ri-play-circle-line play-btn"></i>
-                <div class="video-info">
-                    <h4>Studio Session</h4>
-                    <p style="color:var(--accent-color); font-size: 0.8rem;">Music Video</p>
-                </div>
-            </div>
+            
 
         </div>
     </section>
@@ -479,18 +596,29 @@
                 </ul>
             </div>
             <div class="footer-links">
-                <h4>Categories</h4>
+                <h4>Services</h4>
                 <ul>
-                    <li><a href="portfolio.html" data-filter="fashion" class="hover-target filter-link">Fashion</a></li>
-                    <li><a href="portfolio.html" data-filter="product" class="hover-target filter-link">Product</a></li>
-                    <li><a href="portfolio.html" data-filter="nature" class="hover-target filter-link">Nature & Events</a></li>
-                    <li><a href="#video-showcase" class="hover-target">Video Portfolio</a></li>
+                    <li><a href="services.html#wedding" class="hover-target">Wedding Photography</a></li>
+                    <li><a href="services.html#fashion" class="hover-target">Fashion & Product</a></li>
+                    <li><a href="services.html#event" class="hover-target">Event Coverage</a></li>
+                    <li><a href="services.html#commercials" class="hover-target">Commercials & Reels</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li><i class="ri-mail-line"></i> theocvisionagency@gmail.com</li>
+                    <li><i class="ri-phone-line"></i> +91 8109941748, +91 9407072203</li>
+                    <li><i class="ri-map-pin-line"></i> New York, NY</li>
+                    <li><a href="https://wa.me/918109941748" target="_blank" class="hover-target"><i
+                                class="ri-whatsapp-line"></i>Chat on WhatsApp</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 OCVISION Agency. All rights reserved.</p>
-            <p>Designed with Passion.</p>
+            <p>&copy; 2026 Ocvision. All rights reserved.</p>
+            <p>Designed & Developed by <a href="https://www.astexai.in/" target="_blank" class="hover-target"
+                    style="color: #FFA500;">Astex AI.</a></p>
         </div>
     </footer>
 
@@ -502,28 +630,30 @@
 
     <script>
         // Portfolio Page Specific Animations
-        document.addEventListener('DOMContentLoaded', function() {
-            
+        document.addEventListener('DOMContentLoaded', function () {
+
             // FIX: Use 'to' with 'autoAlpha' AND 'overwrite: true'
-            // This ensures we kill any conflicting global animations on this element
             gsap.to(".portfolio-header h1", {
-                y: 0, 
+                y: 0,
                 opacity: 1,
-                autoAlpha: 1,
-                duration: 1.2, 
+                visibility: 'visible',
+                duration: 1.2,
                 ease: "power4.out",
-                overwrite: true // IMPORTANT: Stops global script from fighting this
+                overwrite: true
             });
-            
+
             gsap.to(".portfolio-header p", {
-                y: 0, 
-                opacity: 1, 
-                autoAlpha: 1,
-                duration: 1, 
+                y: 0,
+                opacity: 1,
+                visibility: 'visible',
+                duration: 1,
                 delay: 0.5,
                 ease: "power2.out",
-                overwrite: true // IMPORTANT: Stops global script from fighting this
+                overwrite: true
             });
+
+            // FIX: Show ALL images on page load - no opacity issues
+            gsap.set(".gallery-item", { opacity: 1, scale: 1 });
 
             // Stagger Animation for Gallery on Load
             gsap.from(".gallery-item", {
@@ -534,7 +664,10 @@
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: ".gallery-grid",
-                    start: "top 85%"
+                    start: "top 85%",
+                    onEnter: function () {
+                        gsap.set(".gallery-item", { opacity: 1 });
+                    }
                 }
             });
 
@@ -549,57 +682,102 @@
                     const imgSrc = item.querySelector('img').src;
                     lightboxImg.src = imgSrc;
                     lightbox.classList.add('open');
-                    lenis.stop();
+                    if (typeof lenis !== 'undefined') {
+                        lenis.stop();
+                    }
                 });
             });
 
             closeLightbox.addEventListener('click', () => {
                 lightbox.classList.remove('open');
-                lenis.start();
-            });
-
-            lightbox.addEventListener('click', (e) => {
-                if(e.target === lightbox) {
-                    lightbox.classList.remove('open');
+                if (typeof lenis !== 'undefined') {
                     lenis.start();
                 }
             });
 
-            // Filter links in footer
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('open');
+                    if (typeof lenis !== 'undefined') {
+                        lenis.start();
+                    }
+                }
+            });
+
+            // Video Hover Play/Pause
+            const videoCards = document.querySelectorAll('.video-card');
+            videoCards.forEach(card => {
+                const video = card.querySelector('video');
+
+                card.addEventListener('mouseenter', () => {
+                    if (video) {
+                        video.play().catch(e => console.log("Video play failed:", e));
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+                });
+            });
+
+            // Filter Functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
             const filterLinks = document.querySelectorAll('.filter-link');
+
+            function filterGallery(filterValue) {
+                // Update active button
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-filter') === filterValue) {
+                        btn.classList.add('active');
+                    }
+                });
+
+                // Filter gallery items
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                        item.classList.remove('hide');
+                        gsap.fromTo(item, { opacity: 0, scale: 0.9 }, {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.5,
+                            ease: "power2.out"
+                        });
+                    } else {
+                        item.classList.add('hide');
+                    }
+                });
+            }
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filterValue = btn.getAttribute('data-filter');
+                    filterGallery(filterValue);
+                });
+            });
+
+            // Filter links in footer
             filterLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const filterValue = link.getAttribute('data-filter');
-                    
-                    // Update active button
-                    document.querySelectorAll('.filter-btn').forEach(btn => {
-                        btn.classList.remove('active');
-                        if(btn.getAttribute('data-filter') === filterValue) {
-                            btn.classList.add('active');
-                        }
-                    });
-                    
-                    // Filter gallery items
-                    galleryItems.forEach(item => {
-                        if (filterValue === 'all' || item.classList.contains(filterValue)) {
-                            item.classList.remove('hide');
-                            gsap.fromTo(item, {opacity: 0, scale: 0.9}, {
-                                opacity: 1, 
-                                scale: 1, 
-                                duration: 0.5,
-                                ease: "power2.out"
-                            });
-                        } else {
-                            item.classList.add('hide');
-                        }
-                    });
-                    
+                    filterGallery(filterValue);
+
                     // Scroll to gallery section
-                    document.querySelector('.gallery-section').scrollIntoView({ behavior: 'smooth' });
+                    document.querySelector('.gallery-section').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 });
             });
+
+            // Initialize all items visible
+            gsap.set(".gallery-item", { opacity: 1 });
         });
     </script>
 </body>
+
 </html>
